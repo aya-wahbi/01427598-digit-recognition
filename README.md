@@ -66,7 +66,7 @@ The project pipeline consists of three main stages:
    ```bash
     python main.py --train
 
-this also Saves the best-performing model in the saved_models folder.
+this also saves the best-performing model in the saved_models folder.
 
 3. To evaluate the trained model:
    ```bash
