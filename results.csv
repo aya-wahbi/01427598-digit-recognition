@@ -1,0 +1,2 @@
+Model_Name,Validation_Accuracy,Macro_Precision,Macro_Recall,Macro_F1,Training_Time(s)
+Baseline_CNN,0.99225,0.992224220271716,0.9921145521580585,0.9921634393039028,336
