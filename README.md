@@ -63,12 +63,14 @@ The project pipeline consists of three main stages:
    cd <PROJECT-FOLDER>
 
 2. To train the baseline model:
-python main.py --train
+   ```bash
+    python main.py --train
 
 this also Saves the best-performing model in the saved_models folder.
 
 3. To evaluate the trained model:
-python main.py --evaluate
+   ```bash
+    python main.py --evaluate
 
 This evaluates the performance on the test set and logs evaluation metrics, confusion matrix, and classification report.
 
