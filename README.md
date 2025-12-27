@@ -59,7 +59,7 @@ The project pipeline consists of three main stages:
 ### Setup
 1. Clone the repository:
    ```bash
-   git clone <YOUR-REPO-URL>
+   git clone <https://github.com/aya-wahbi/01427598-digit-recognition.git>
    cd <PROJECT-FOLDER>
 
 2. To train the baseline model:
