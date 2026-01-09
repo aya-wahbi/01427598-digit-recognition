@@ -48,12 +48,12 @@ def main():
         ModelCheckpoint(
             filepath=os.path.join("saved_models", f"{model_name.lower()}_best.keras"),
             monitor="val_accuracy",
-            save_best_only=True,
+            save_best_only=True, # Only saves the model (weights and architecture) if the val_accuracy is better than any previous epoch.
             verbose=1
         ),
         EarlyStopping(
             monitor="val_accuracy",
-            patience=5,
+            patience=5, # if does not improve for 5 consecutive epochs, training will stop. 
             restore_best_weights=True,
             verbose=1
         )

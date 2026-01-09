@@ -16,7 +16,8 @@ def load_data(validation_split=0.2):
     train_data = train_data.astype("float32") / 255.0
     test_data = test_data.astype("float32") / 255.0
 
-    # reshape data to add channel dimension (which is required for CNN)
+    # reshape data to add channel dimension (which is required for CNN), The new 1 at the end represents the number of color channels,1 represents intensity (from black to white).
+    # before reshaping the dims were (60000, 28, 28) for the training set and (10000, 28, 28) for the test set.
     train_data = np.expand_dims(train_data, axis=-1)  # Shape: (60000, 28, 28, 1)
     test_data = np.expand_dims(test_data, axis=-1)    # Shape: (10000, 28, 28, 1)
 

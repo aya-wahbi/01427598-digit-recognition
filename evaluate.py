@@ -25,7 +25,8 @@ def evaluate_model_with_macro_metrics(model_path, evaluation_data, evaluation_la
 
     # Generate predictions
     print("Making predictions...")
-    predictions = model.predict(evaluation_data)
+    predictions = model.predict(evaluation_data) # will be an array where each row represents a sample, and each column contains the probability that the sample belongs to that class.
+    #Example for one sample: [0.01, 0.02, 0.95, 0.01, 0.01, 0.00, 0.00, 0.00, 0.00, 0.00]
     predicted_classes = np.argmax(predictions, axis=1)
 
     # Convert one-hot labels to indices if necessary
@@ -36,6 +37,7 @@ def evaluate_model_with_macro_metrics(model_path, evaluation_data, evaluation_la
     val_accuracy = np.mean(predicted_classes == evaluation_labels)
 
     # Macro-averaged metrics
+    # Calculates precision/recall/f1 for each class independently and then takes the unweighted average of those per-class scores.  it means that each class contributes equally to the final average, regardless of how many samples belong to that class.
     macro_precision = precision_score(evaluation_labels, predicted_classes, average="macro")
     macro_recall = recall_score(evaluation_labels, predicted_classes, average="macro")
     macro_f1 = f1_score(evaluation_labels, predicted_classes, average="macro")
