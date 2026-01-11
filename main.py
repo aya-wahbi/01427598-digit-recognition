@@ -24,7 +24,7 @@ def main():
 
     args = parser.parse_args()
 
-    # Step 1: Train the Model (if --train is specified)
+    # Step 1: Train the Model
     if args.train:
         print("\n--- Starting Training for the Baseline Model ---")
         train_model()  # Now always calls the baseline training function
@@ -32,7 +32,7 @@ def main():
     else:
         print("\nTraining skipped. Use '--train' to train the baseline model.\n")
 
-    # Step 2: Evaluate the Model (if --evaluate is specified)
+    # Step 2: Evaluate the Model 
     if args.evaluate:
         print("\n--- Starting Evaluation for the Baseline Model ---")
         print("Loading evaluation data...")

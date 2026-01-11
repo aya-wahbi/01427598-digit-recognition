@@ -10,7 +10,7 @@ def evaluate_model_with_macro_metrics(model_path, evaluation_data, evaluation_la
     Arguments:
     - model_path: File path to the saved model.
     - evaluation_data: Input data for testing.
-    - evaluation_labels: True labels for the input data (can be one-hot or sparse).
+    - evaluation_labels: True labels for the input data.
     - log_to_console: If True, prints metrics and confusion matrix.
 
     Returns:
@@ -20,16 +20,15 @@ def evaluate_model_with_macro_metrics(model_path, evaluation_data, evaluation_la
     - macro_f1: Macro-averaged F1-Score across all classes.
     """
     # Load the trained model
-    print(f"Loading model from {model_path}...")
+ 
     model = load_model(model_path)
 
     # Generate predictions
-    print("Making predictions...")
     predictions = model.predict(evaluation_data) # will be an array where each row represents a sample, and each column contains the probability that the sample belongs to that class.
     #Example for one sample: [0.01, 0.02, 0.95, 0.01, 0.01, 0.00, 0.00, 0.00, 0.00, 0.00]
     predicted_classes = np.argmax(predictions, axis=1)
 
-    # Convert one-hot labels to indices if necessary
+    # Convert one-hot labels to indices
     if evaluation_labels.ndim == 2 and evaluation_labels.shape[1] > 1:
         evaluation_labels = np.argmax(evaluation_labels, axis=1)  # Convert one-hot to indices
 

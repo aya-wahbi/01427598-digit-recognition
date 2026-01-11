@@ -1,0 +1,9 @@
+image,output,timestamp
+"{""background"": "".gradio\\flagged\\image\\6690e2557d25fcd0084b\\background.png"", ""layers"": ["".gradio\\flagged\\image\\49735512f3907ac1aaf4\\layer_0.png""], ""composite"": "".gradio\\flagged\\image\\3e1efe9bedbaa789e848\\composite.png"", ""id"": null}",,2026-01-11 15:42:36.053055
+.gradio\flagged\image\acfda8dacb938a749c29\15713178995.webp,"Predicted Digit: 8
+Confidence: 0.93",2026-01-11 15:45:56.545481
+"{""background"": "".gradio\\flagged\\image\\a19b218931c0f246687a\\background.png"", ""layers"": ["".gradio\\flagged\\image\\360fb196dfb1e6f720f2\\layer_0.png""], ""composite"": "".gradio\\flagged\\image\\94ec2a160253280e7d66\\composite.png"", ""id"": null}",,2026-01-11 15:51:26.135801
+"{""background"": "".gradio\\flagged\\image\\3092fa65934e07074b02\\background.png"", ""layers"": ["".gradio\\flagged\\image\\99a2f3c8686bf0645ae3\\layer_0.png""], ""composite"": "".gradio\\flagged\\image\\f12a326d9c6cc0b72d10\\composite.png"", ""id"": null}",,2026-01-11 15:53:07.394573
+"{""background"": "".gradio\\flagged\\image\\86e3964d689e0f42b62c\\background.png"", ""layers"": ["".gradio\\flagged\\image\\960be0d1a63174a57e89\\layer_0.png""], ""composite"": "".gradio\\flagged\\image\\bd84835e5e1f6f0bfa2c\\composite.png"", ""id"": null}",,2026-01-11 15:56:15.882621
+"{""background"": "".gradio\\flagged\\image\\4187927a5ea6d2d5b04b\\background.png"", ""layers"": ["".gradio\\flagged\\image\\ea60d9e3230b09b895a9\\layer_0.png""], ""composite"": "".gradio\\flagged\\image\\cb00ff54ed1c4bd11eed\\composite.png"", ""id"": null}","Predicted Digit: 3
+Confidence: 1.00",2026-01-11 16:14:48.796721
