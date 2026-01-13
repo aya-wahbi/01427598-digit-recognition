@@ -1,79 +1,90 @@
 # 01427598- Digit Recognition - MNIST Project
 
+# Digit Recognition with CNN and Data Augmentation
 ## Overview
 
-This project implements a digit recognition pipeline using Convolutional Neural Networks (CNNs) to classify handwritten digits (0–9) from the [MNIST dataset](http://yann.lecun.com/exdb/mnist/). The primary goal is to establish a working pipeline with a baseline model and evaluate its performance with macro-averaged metrics, including precision, recall, and F1-score.
+This project implements an end-to-end solution for handwritten digit recognition using Convolutional Neural Networks (CNNs) on the [MNIST dataset](http://yann.lecun.com/exdb/mnist/). Originally developed as a baseline model, the project later evolved to integrate data augmentation, batch normalization, and adaptive learning rate strategies. These enhancements have not only boosted accuracy but also demonstrated the benefits of robust training techniques, even on well-studied datasets.
 
-### Goal
-- **Error Metric**: 
-  - Macro F1-Score
-  - Validation accuracy.
-- **Target**: 
-  - Achieve **validation accuracy >98%** and **macro F1-score >0.90**.
+## Project Goals
 
----
+- **Validation Accuracy**: Achieve state-of-the-art accuracy on the MNIST validation set.
+- **Macro-Averaged Metrics**: Attain near-perfect precision, recall, and F1-score (target > 0.99) for reliable performance evaluation.
+- **Generalization**: Utilize data augmentation to enhance the network's ability to generalize and mitigate overfitting.
+- **Model Comparison**: Compare the performance of baseline and refined architectures to balance training time and predictive performance.
 
-## Results
+## Final Performance Metrics
 
-| Metric             | Target Value | Validation Result | Test Result |
-|--------------------|--------------|-------------------|-------------|
-| **Validation Accuracy** | >98%       | 99.25%            | N/A         |
-| **F1-Score (Macro)**     | >0.98      | 99.22%            | 99.31%      |
-| **Precision (Macro)**    | >0.98        | 99.22%            | 99.31%      |
-| **Recall (Macro)**       | >0.98        | 99.21%            | 99.31%      |
+After several experiments, the following results were obtained for the different models:
 
-The results show exceptional performance across all metrics, comfortably exceeding the target values. The test results affirm that the model generalizes well to unseen data with near-perfect macro-average metrics. 
+| Model Name   | Validation Accuracy | Macro Precision | Macro Recall | Macro F1 Score | Training Time (s) |
+|--------------|---------------------|-----------------|--------------|----------------|-------------------|
+| Baseline_CNN | 0.99225             | 0.99222         | 0.99211      | 0.99216        | 336               |
+| dataAugm_CNN | 0.99375             | 0.99377         | 0.99366      | 0.99371        | 165               |
+| Refined_CNN  | 0.99575             | 0.99573         | 0.99569      | 0.99571        | 1047              |
 
----
+*Notes*:
+- The refined model achieved the highest validation accuracy and macro-averaged metrics while requiring more training time.
 
 ## Pipeline Description
 
-The project pipeline consists of three main stages:
+The project pipeline consists of the following stages:
 
-1. **Data Preprocessing**:
-   - Input normalization: MNIST image pixel values are scaled to the range [0, 1].
-   - Reshaping: Images are reshaped into \( 28 \times 28 \) grayscale inputs with a single channel.
-   - Dataset splitting: MNIST data is divided into training, validation, and test sets.
-   - Future possibilities: augmentation functionality (currently commented out still to be implemented and imporved upon).
+### 1. Data Preprocessing
 
-2. **Model Training**:
-   - A baseline CNN model with two convolutional blocks, a dense hidden layer, and a dropout layer was implemented.
-   - **Optimizer**: Adam.
-   - **Loss Function**: Categorical Crossentropy.
-   - Callback mechanisms:
-     - **ModelCheckpoint**: Saved the best-performing model based on validation accuracy.
-     - **EarlyStopping**: Halted training when validation accuracy plateaued.
-   - Training time: **5 minutes and 36 seconds**.
+- **Normalization & Reshaping**:  
+  - MNIST image pixel values are scaled to the range \([0, 1]\).  
+  - Images are reshaped into \(28 \times 28\) grayscale inputs with a single channel.
+- **Dataset Splitting**:  
+  - The dataset is partitioned into training, validation, and test sets.
+- **Data Augmentation**:  
+  - Random transformations (rotations, translations, and zooming) are applied to the training images to increase diversity and reduce the risk of overfitting.
 
-3. **Evaluation**:
-   - The trained model was extensively evaluated on the test set.
-   - Performance metrics included:
-     - Test accuracy
-     - Macro-averaged precision, recall, and F1-score.
-   - Confusion matrix and classification report provided granular analysis.
+### 2. Model Training
 
----
+- **Baseline CNN**:  
+  - A simple CNN architecture with convolutional layers, a dense hidden layer, and a dropout layer.
+- **Refined CNN Enhancements**:  
+  - **Batch Normalization**: Added after convolutional and dense layers to stabilize the training process.
+  - **Learning Rate Scheduling**: Implemented using the `ReduceLROnPlateau` callback to dynamically lower the learning rate when improvements plateau.
+- **Training Settings**:  
+  - **Optimizer**: Adam  
+  - **Loss Function**: Categorical Crossentropy  
 
-## How to Run the Project
+Training is initiated with the command:
+```bash
+python main.py --train
+```
+The best-performing model from each experiment is automatically saved in the `saved_models` folder.
 
-### Setup
-1. Clone the repository:
-   ```bash
-   git clone <https://github.com/aya-wahbi/01427598-digit-recognition.git>
-   cd <PROJECT-FOLDER>
+### 3. Evaluation
 
-2. To train the baseline model:
-   ```bash
-    python main.py --train
+Models are evaluated on the test set using:
+```bash
+python main.py --evaluate
+```
+The evaluation process includes:
+- Generating predictions on the test set.
+- Computing a confusion matrix.
+- Calculating macro-averaged metrics (precision, recall, and F1-score).
+- Logging results to `results.csv`.
 
-this also saves the best-performing model in the saved_models folder.
+## Detailed Training Logs Summary
 
-3. To evaluate the trained model:
-   ```bash
-    python main.py --evaluate
+Below is an excerpt summarizing key milestones from the refined model training session:
 
-This evaluates the performance on the test set and logs evaluation metrics, confusion matrix, and classification report.
+- **Epoch 1**: Validation accuracy started at 0.98700.
+- **Epoch 2**: Improved to 0.99200, and the model was saved.
+- **Epoch 9**: Validation accuracy reached 0.99433.
+- **Epoch 12**: The model achieved 0.99467.
+- **Epoch 15**: Improved further to 0.99517.
+- **Epoch 19**: The best validation accuracy of 0.99575 was recorded.
+  
+The refined model took approximately 1047 seconds to train, reflecting the additional computational load due to data augmentation and the advanced regularization strategies.
 
-## Future Work / Challenges
-- Data Augmentation: Investigate techniques for artificially expanding the MNIST dataset to further improve generalization.
+## Time Spent
 
+The overall project—from initial setup and baseline development to model refinement and extensive evaluation—required approximately 40–45 hours. While the refined approach increased training time, the significant gains in accuracy and robustness justify this trade-off.
+
+## Conclusion
+
+This project demonstrates that even for a well-studied task like MNIST digit recognition, incremental improvements through data augmentation, batch normalization, and adaptive learning rate strategies can translate into meaningful performance gains. The refined CNN achieved nearly 99.6% validation accuracy along with outstanding macro-averaged metrics, underscoring the value of refined training pipelines for achieving competitive results. Future work may include exploring deeper architectures or ensemble techniques to further push the accuracy boundaries.
