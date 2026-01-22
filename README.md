@@ -50,6 +50,11 @@ The project pipeline consists of the following stages:
   - **Optimizer**: Adam  
   - **Loss Function**: Categorical Crossentropy  
 
+
+First: 
+```bash
+pip install -r requirements.txt
+```
 Training is initiated with the command:
 ```bash
 python main.py --train
